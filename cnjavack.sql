@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 05, 2024 lúc 11:52 AM
+-- Thời gian đã tạo: Th12 05, 2024 lúc 03:48 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -74,25 +74,59 @@ CREATE TABLE `properties` (
   `id` bigint(20) NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
-  `price` decimal(15,2) NOT NULL,
+  `price` decimal(38,2) NOT NULL,
   `location` varchar(255) NOT NULL,
-  `type` enum('House','Apartment','Land','Villa') NOT NULL,
-  `status` enum('Available','Sold','Rented') DEFAULT 'Available',
+  `type` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
   `category_id` bigint(20) NOT NULL,
   `owner_id` bigint(20) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `acreage` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `properties`
 --
 
-INSERT INTO `properties` (`id`, `title`, `description`, `price`, `location`, `type`, `status`, `category_id`, `owner_id`, `created_at`, `updated_at`) VALUES
-(1, 'Nhà phố 3 tầng quận 1', 'Nhà phố 3 tầng, thiết kế hiện đại, diện tích 120m2.', 15000000000.00, 'Quận 1, TP. Hồ Chí Minh', 'House', 'Available', 1, 1, '2024-12-05 10:49:46', '2024-12-05 10:49:46'),
-(2, 'Căn hộ 2 phòng ngủ', 'Căn hộ chung cư 2 phòng ngủ, nội thất đầy đủ.', 2500000000.00, 'Quận 7, TP. Hồ Chí Minh', 'Apartment', 'Available', 2, 1, '2024-12-05 10:49:46', '2024-12-05 10:49:46'),
-(3, 'Đất nền quận 9', 'Đất nền quận 9, thích hợp xây nhà.', 5000000000.00, 'Quận 9, TP. Hồ Chí Minh', 'Land', 'Available', 3, 2, '2024-12-05 10:49:46', '2024-12-05 10:49:46'),
-(4, 'Biệt thự ven biển', 'Biệt thự cao cấp, view biển, thiết kế sang trọng.', 35000000000.00, 'Vũng Tàu', 'Villa', 'Available', 4, 2, '2024-12-05 10:49:46', '2024-12-05 10:49:46');
+INSERT INTO `properties` (`id`, `title`, `description`, `price`, `location`, `type`, `status`, `category_id`, `owner_id`, `created_at`, `updated_at`, `acreage`) VALUES
+(1, 'Nhà phố 3 tầng quận 1', 'Nhà phố 3 tầng, thiết kế hiện đại, diện tích 120m2.', 15000000000.00, 'Quận 1, TP. Hồ Chí Minh', 'House', 'Available', 1, 1, '2024-12-05 10:49:46', '2024-12-05 12:38:38', '50'),
+(2, 'Căn hộ 2 phòng ngủ', 'Căn hộ chung cư 2 phòng ngủ, nội thất đầy đủ.', 2500000000.00, 'Quận 7, TP. Hồ Chí Minh', 'Apartment', 'Available', 2, 1, '2024-12-05 10:49:46', '2024-12-05 12:38:38', '50'),
+(3, 'Đất nền quận 9', 'Đất nền quận 9, thích hợp xây nhà.', 5000000000.00, 'Quận 9, TP. Hồ Chí Minh', 'Land', 'Available', 3, 2, '2024-12-05 10:49:46', '2024-12-05 12:38:38', '50'),
+(4, 'Biệt thự ven biển', 'Biệt thự cao cấp, view biển, thiết kế sang trọng.', 35000000000.00, 'Vũng Tàu', 'Villa', 'Available', 4, 2, '2024-12-05 10:49:46', '2024-12-05 12:38:38', '50');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `property_details`
+--
+
+CREATE TABLE `property_details` (
+  `id` bigint(20) NOT NULL,
+  `pcontent` longtext NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `bhk` varchar(255) NOT NULL,
+  `stype` varchar(255) NOT NULL,
+  `bedroom` int(11) NOT NULL,
+  `bathroom` int(11) NOT NULL,
+  `balcony` int(11) NOT NULL,
+  `kitchen` int(11) NOT NULL,
+  `hall` int(11) NOT NULL,
+  `floor` varchar(255) NOT NULL,
+  `price` int(11) NOT NULL,
+  `location` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `state` varchar(255) NOT NULL,
+  `totalfloor` varchar(255) NOT NULL,
+  `properties_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `property_details`
+--
+
+INSERT INTO `property_details` (`id`, `pcontent`, `type`, `bhk`, `stype`, `bedroom`, `bathroom`, `balcony`, `kitchen`, `hall`, `floor`, `price`, `location`, `city`, `state`, `totalfloor`, `properties_id`) VALUES
+(1, 'Quý vị đang xem nội dung tin rao \"Chính chủ kẹt tiền bán gấp lô đất cắt lỗ 200tr\" - Mã tin 38597297. Mọi thông tin, nội dung liên quan tới tin rao này là do người đăng tin đăng tải và chịu trách nhiệm. Batdongsan.com.vn luôn cố gắng để các thông tin được hữu ích nhất cho quý vị tuy nhiên Batdongsan.com.vn không đảm bảo và không chịu trách nhiệm về bất kỳ thông tin, nội dung nào liên quan tới tin rao này. Trường hợp phát hiện nội dung tin đăng không chính xác, Quý vị hãy thông báo và cung cấp thông tin cho Ban quản trị Batdongsan.com.vn theo Hotline 19001881 để được hỗ trợ nhanh và kịp thời nhất.', 'house', '4', 'sale', 4, 2, 0, 1, 1, '2nd floor', 1869, '124 cu chi', 'ho chi minh', 'viet nam', '2', 1);
 
 -- --------------------------------------------------------
 
@@ -154,8 +188,8 @@ CREATE TABLE `transactions` (
   `buyer_id` bigint(20) NOT NULL,
   `seller_id` bigint(20) NOT NULL,
   `transaction_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `price` decimal(15,2) NOT NULL,
-  `status` enum('Completed','Cancelled') DEFAULT 'Completed'
+  `price` decimal(38,2) NOT NULL,
+  `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -177,8 +211,8 @@ CREATE TABLE `users` (
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `role` enum('Admin','User') DEFAULT 'User',
+  `phone` varchar(255) NOT NULL,
+  `role` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -216,6 +250,13 @@ ALTER TABLE `properties`
   ADD PRIMARY KEY (`id`),
   ADD KEY `category_id` (`category_id`),
   ADD KEY `owner_id` (`owner_id`);
+
+--
+-- Chỉ mục cho bảng `property_details`
+--
+ALTER TABLE `property_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `properties_id` (`properties_id`);
 
 --
 -- Chỉ mục cho bảng `property_images`
@@ -271,6 +312,12 @@ ALTER TABLE `properties`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT cho bảng `property_details`
+--
+ALTER TABLE `property_details`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT cho bảng `property_images`
 --
 ALTER TABLE `property_images`
@@ -311,6 +358,12 @@ ALTER TABLE `favorites`
 ALTER TABLE `properties`
   ADD CONSTRAINT `properties_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
   ADD CONSTRAINT `properties_ibfk_2` FOREIGN KEY (`owner_id`) REFERENCES `users` (`id`);
+
+--
+-- Các ràng buộc cho bảng `property_details`
+--
+ALTER TABLE `property_details`
+  ADD CONSTRAINT `property_details_ibfk_1` FOREIGN KEY (`properties_id`) REFERENCES `properties` (`id`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `property_images`
