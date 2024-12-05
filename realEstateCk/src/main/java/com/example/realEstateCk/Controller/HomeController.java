@@ -35,20 +35,20 @@ public class HomeController {
         return "services";
     }
 
-    @GetMapping("/properties")
-    public String propertiesPage(Model model) {
-        List<RealEstate> properties = realEstateService.getAllRealEstates();
-
-        // Định dạng giá trị price
-        DecimalFormat formatter = new DecimalFormat("#,###.00");
-        for (RealEstate realEstate : properties) {
-            String formattedPrice = "$" + formatter.format(realEstate.getPrice());
-            realEstate.setFormattedPrice(formattedPrice); // set price formatted
-        }
-
-        model.addAttribute("realEstates", properties);
-        return "properties";
-    }
+//    @GetMapping("/properties")
+//    public String propertiesPage(Model model) {
+//        List<RealEstate> properties = realEstateService.getAllRealEstates();
+//
+//        // Định dạng giá trị price
+//        DecimalFormat formatter = new DecimalFormat("#,###.00");
+//        for (RealEstate realEstate : properties) {
+//            String formattedPrice = "$" + formatter.format(realEstate.getPrice());
+//            realEstate.setFormattedPrice(formattedPrice); // set price formatted
+//        }
+//
+//        model.addAttribute("realEstates", properties);
+//        return "properties";
+//    }
 
     @GetMapping("/properties-single")
     public String propertiesSinglePage() {
