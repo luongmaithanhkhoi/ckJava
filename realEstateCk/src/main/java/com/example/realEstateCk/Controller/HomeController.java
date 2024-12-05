@@ -18,6 +18,12 @@ public class HomeController {
         return "index";
     }
 
+
+    @GetMapping("/seller/addMoney")
+    public String addMoney() {
+        return "/Admin/paypal";
+    }
+
     @GetMapping("/about")
     public String aboutPage() {
         return "about";
