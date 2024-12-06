@@ -1,23 +1,27 @@
 package com.example.realEstateCk.Controller;
 
-import com.example.realEstateCk.Model.RealEstate;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.ui.Model;
-import com.example.realEstateCk.Service.RealEstateService;
+import com.example.realEstateCk.model.Property;
+import com.example.realEstateCk.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import java.text.DecimalFormat;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
 import java.util.List;
 
 @Controller
 public class HomeController {
-
     @Autowired
-    private RealEstateService realEstateService;
-
-    @GetMapping("/")
+    private PropertyService propertyService;
+    @GetMapping("/a")
     public String login() {
         return "index";
+    }
+
+
+    @GetMapping("/seller/addMoney")
+    public String addMoney() {
+        return "/Admin/paypal";
     }
 
     @GetMapping("/about")
@@ -34,34 +38,15 @@ public class HomeController {
     public String servicesPage() {
         return "services";
     }
-
 //    @GetMapping("/properties")
-//    public String propertiesPage(Model model) {
-//        List<RealEstate> properties = realEstateService.getAllRealEstates();
-//
-//        // Định dạng giá trị price
-//        DecimalFormat formatter = new DecimalFormat("#,###.00");
-//        for (RealEstate realEstate : properties) {
-//            String formattedPrice = "$" + formatter.format(realEstate.getPrice());
-//            realEstate.setFormattedPrice(formattedPrice); // set price formatted
-//        }
-//
-//        model.addAttribute("realEstates", properties);
+//    public String propertiesPage() {
 //        return "properties";
 //    }
 
-    @GetMapping("/properties-single")
-    public String propertiesSinglePage() {
-        return "properties-single";
-    }
-
-    @GetMapping("/blog")
-    public String blogPage() {
-        return "blog";
-    }
-
-    @GetMapping("/contact")
-    public String contactPage() {
-        return "contact";
+    @GetMapping("/")
+    public String viewProperty(Model model) {
+        List<Property> properties = (List<Property>)propertyService.getAllProperty();
+        model.addAttribute("listHomeProperties", properties);
+        return "index";
     }
 }
