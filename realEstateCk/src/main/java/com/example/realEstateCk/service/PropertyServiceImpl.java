@@ -47,4 +47,9 @@ public class PropertyServiceImpl implements PropertyService {
     public Property getPropertyById(Long id) {
         return propertyRepository.findById(id).get();
     }
+
+    @Override
+    public Page<Property> findPropertiesByFilters(Long categoryId, Long locationId, Double minPrice, Double maxPrice, Pageable pageable) {
+        return propertyRepository.findPropertiesByFilters(categoryId, locationId, minPrice, maxPrice, pageable);
+    }
 }

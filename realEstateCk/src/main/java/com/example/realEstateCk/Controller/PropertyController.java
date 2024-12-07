@@ -10,6 +10,7 @@ import com.example.realEstateCk.service.PropertyDetailsService;
 import com.example.realEstateCk.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -84,5 +85,39 @@ public class PropertyController {
 //        model.addAttribute("listLocations", locations);
 //        return "property-search";
 //    }
+
+    @GetMapping("/properties/search")
+    public String searchProperties(
+            @RequestParam(required = false) Long categoryId,
+            @RequestParam(required = false) Long locationId,
+            @RequestParam(required = false) String priceRange,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "6") int size,
+            Model model) {
+
+        Double minPrice = null;
+        Double maxPrice = null;
+
+        // Xử lý priceRange (ví dụ: "500000000-800000000")
+        if (priceRange != null && priceRange.contains("-")) {
+            String[] prices = priceRange.split("-");
+            minPrice = Double.valueOf(prices[0]);
+            maxPrice = Double.valueOf(prices[1]);
+        }
+
+        Page<Property> properties = propertyService.findPropertiesByFilters(categoryId, locationId, minPrice, maxPrice, PageRequest.of(page, size));
+
+        model.addAttribute("listProperties", properties.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", properties.getTotalPages());
+
+        List<Category> categories = categoryService.getAllCategories();
+        List<Location> locations = locationService.getAllLocations();
+
+        model.addAttribute("categories", categories);
+        model.addAttribute("locations", locations);
+
+        return "properties";
+    }
 
 }

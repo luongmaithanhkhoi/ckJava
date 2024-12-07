@@ -2,6 +2,7 @@ package com.example.realEstateCk.service;
 
 import com.example.realEstateCk.model.Property;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface PropertyService {
     public Iterable<Property> findByDescription(String description);
@@ -11,4 +12,5 @@ public interface PropertyService {
     public Iterable<Property> getAllPropertyHome();
     public Page<Property> getAllProperty(int page, int size);
     public Property getPropertyById(Long id);
+    Page<Property> findPropertiesByFilters(Long categoryId, Long locationId, Double minPrice, Double maxPrice, Pageable pageable);
 }
