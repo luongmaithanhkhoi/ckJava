@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
     <title>Ecoverde - Free Bootstrap 4 Template by Colorlib</title>
     <meta charset="utf-8">
@@ -18,31 +18,12 @@
     <link rel="stylesheet" href="/css/flaticon.css">
     <link rel="stylesheet" href="/css/style.css">
   </head>
-<!--  <div th:replace="fragments/headers"></div>-->
   <body>
 
-	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container">
-	      <a class="navbar-brand" href="index.html">Ecoverde</a>
-	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="oi oi-menu"></span> Menu
-	      </button>
 
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
-	          <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
-	          <li class="nav-item"><a href="/agent" class="nav-link">Agent</a></li>
-	          <li class="nav-item"><a href="/services" class="nav-link">Services</a></li>
-	          <li class="nav-item"><a href="/properties" class="nav-link">Properties</a></li>
-	          <li class="nav-item"><a href="/blog" class="nav-link">Blog</a></li>
-	          <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
-	        </ul>
-	      </div>
-	    </div>
-	  </nav>
-    <!-- END nav -->
-
+	<!-- Include Header -->
+	<div th:replace="layouts/header :: header"></div>
+    
     <section class="hero-wrap" style="background-image: url('/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
@@ -95,25 +76,7 @@
 								  </div>
 							  </div>
 		        			</div>
-<!--							<div class="col-lg align-items-end">-->
-<!--								<div class="form-group">-->
-<!--									<label for="">Property Type</label>-->
-<!--									<div class="form-field">-->
-<!--										<div class="select-wrap">-->
-<!--											<div class="icon"><span class="fa fa-chevron-down"></span></div>-->
-<!--											&lt;!&ndash;		                      <select name="" id="a" class="form-control" th:each="property: ${listProperties}">&ndash;&gt;-->
-<!--											&lt;!&ndash;		                        <option value="">Residence</option>&ndash;&gt;-->
-<!--											&lt;!&ndash;		                        <option value="">Offices</option>&ndash;&gt;-->
-<!--											&lt;!&ndash;		                        <option value="">Commercial</option>&ndash;&gt;-->
-<!--											&lt;!&ndash;		                      </select>&ndash;&gt;-->
-<!--											<select name="city" id="city" class="form-control" aria-label=".form-select-sm">&ndash;&gt;-->
-<!--												<option value="" selected>Chọn tỉnh thành</option>-->
-<!--											</select>-->
-
-<!--										</div>-->
-<!--									</div>-->
 		        			<div class="col-lg align-items-end">
-
 		        				<div class="form-group">
 		        					<label for="">Location</label>
 <!--		          				<div class="form-field">-->
@@ -730,122 +693,14 @@
           </div>
         </div>
       </div>
-    </section>
-<!--	  <div th:replace="fragments/footer"></div>-->
-    <footer class="ftco-footer ftco-section">
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Ecoverde</h2>
-              <p>Far far away, behind the word mountains, far from the countries.</p>
-              <ul class="ftco-footer-social list-unstyled mt-5">
-                <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="fa fa-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="fa fa-instagram"></span></a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4 ml-md-4">
-              <h2 class="ftco-heading-2">Community</h2>
-              <ul class="list-unstyled">
-                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Search Properties</a></li>
-                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>For Agents</a></li>
-                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Reviews</a></li>
-                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>FAQs</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4 ml-md-4">
-              <h2 class="ftco-heading-2">About Us</h2>
-              <ul class="list-unstyled">
-                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Our Story</a></li>
-                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Meet the team</a></li>
-                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Careers</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Company</h2>
-              <ul class="list-unstyled">
-                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>About Us</a></li>
-                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Press</a></li>
-                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Contact</a></li>
-                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Careers</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-            	<h2 class="ftco-heading-2">Have a Questions?</h2>
-            	<div class="block-23 mb-3">
-	              <ul>
-	                <li><span class="icon fa fa-map"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-	                <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-	                <li><a href="#"><span class="icon fa fa-envelope pr-4"></span><span class="text">info@yourdomain.com</span></a></li>
-	              </ul>
-	            </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
-
-            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-          </div>
-        </div>
-      </div>
-    </footer>
+    </section>		
 
 
-	  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-	  <script>
-		  var citis = document.getElementById("city");
-		  var districts = document.getElementById("district");
-		  var wards = document.getElementById("ward");
-		  var Parameter = {
-			  url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
-			  method: "GET",
-			  responseType: "application/json",
-		  };
-		  var promise = axios(Parameter);
-		  promise.then(function (result) {
-			  renderCity(result.data);
-		  });
+	<!-- Include Footer -->
+	<div th:replace="layouts/footer :: footer"></div>
 
-		  function renderCity(data) {
-			  for (const x of data) {
-				  citis.options[citis.options.length] = new Option(x.Name, x.Id);
-			  }
-			  citis.onchange = function () {
-				  district.length = 1;
-				  ward.length = 1;
-				  if(this.value != ""){
-					  const result = data.filter(n => n.Id === this.value);
 
-					  for (const k of result[0].Districts) {
-						  district.options[district.options.length] = new Option(k.Name, k.Id);
-					  }
-				  }
-			  };
-			  district.onchange = function () {
-				  ward.length = 1;
-				  const dataCity = data.filter((n) => n.Id === citis.value);
-				  if (this.value != "") {
-					  const dataWards = dataCity[0].Districts.filter(n => n.Id === this.value)[0].Wards;
 
-					  for (const w of dataWards) {
-						  wards.options[wards.options.length] = new Option(w.Name, w.Id);
-					  }
-				  }
-			  };
-		  }
-	  </script>
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
@@ -864,6 +719,6 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="/js/google-map.js"></script>
   <script src="/js/main.js"></script>
-
+    
   </body>
 </html>

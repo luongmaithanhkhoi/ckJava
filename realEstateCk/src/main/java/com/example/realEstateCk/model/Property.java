@@ -24,7 +24,11 @@ public class Property {
     private BigDecimal price;
 
     @Column(nullable = false)
-    private String location;
+    private String address;
+
+    @ManyToOne
+    @JoinColumn(name = "location_id", nullable = false)
+    private Location location; // Thêm mối quan hệ với bảng location
 
     @Column(nullable = false)
     private String type;
@@ -50,7 +54,6 @@ public class Property {
     private LocalDateTime createdAt = LocalDateTime.now();
 
     // Getters and Setters
-    // ...
     public Long getId() {
         return id;
     }
@@ -91,11 +94,19 @@ public class Property {
         this.price = price;
     }
 
-    public String getLocation() {
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 
@@ -106,8 +117,6 @@ public class Property {
     public void setType(String type) {
         this.type = type;
     }
-
-
 
     public String getStatus() {
         return status;
