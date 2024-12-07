@@ -59,18 +59,8 @@
 										<div class="form-field">
 											<div class="select-wrap">
 												<div class="icon"><span class="fa fa-chevron-down"></span></div>
-												<!--		                      <select name="" id="a" class="form-control" th:each="property: ${listProperties}">-->
-												<!--		                        <option value="">Residence</option>-->
-												<!--		                        <option value="">Offices</option>-->
-												<!--		                        <option value="">Commercial</option>-->
-												<!--		                      </select>-->
 
-<!--												<select name="listProperties" id="listProperties" class="form-control" th:field="*{listProperties}">-->
-<!--													<option value="" disabled selected style="color:#1a1a1a">&#45;&#45; Select Property Type &#45;&#45;</option>-->
-<!--                                                    <option th:each="type : ${categories}" th:value="${type.id}" th:text="${type.name}"></option>-->
-<!--												</select>-->
-
-                                                <select name="listProperties" id="listProperties" class="form-control">
+                                                <select name="listProperties" id="listCategories" class="form-control">
                                                     <option value="" disabled selected style="color:#1a1a1a">-- Select Property Type --</option>
                                                     <th:block th:each="type : ${categories}">
                                                         <option th:value="${type.id}" th:text="${type.name}" style="color:#1a1a1a"></option>
@@ -80,62 +70,53 @@
 										</div>
 									</div>
 								</div>
-								<!--							<div class="col-lg align-items-end">-->
-								<!--								<div class="form-group">-->
-								<!--									<label for="">Property Type</label>-->
-								<!--									<div class="form-field">-->
-								<!--										<div class="select-wrap">-->
-								<!--											<div class="icon"><span class="fa fa-chevron-down"></span></div>-->
-								<!--											&lt;!&ndash;		                      <select name="" id="a" class="form-control" th:each="property: ${listProperties}">&ndash;&gt;-->
-								<!--											&lt;!&ndash;		                        <option value="">Residence</option>&ndash;&gt;-->
-								<!--											&lt;!&ndash;		                        <option value="">Offices</option>&ndash;&gt;-->
-								<!--											&lt;!&ndash;		                        <option value="">Commercial</option>&ndash;&gt;-->
-								<!--											&lt;!&ndash;		                      </select>&ndash;&gt;-->
-								<!--											<select name="city" id="city" class="form-control" aria-label=".form-select-sm">&ndash;&gt;-->
-								<!--												<option value="" selected>Chọn tỉnh thành</option>-->
-								<!--											</select>-->
 
-								<!--										</div>-->
-								<!--									</div>-->
 								<div class="col-lg align-items-end">
 
 									<div class="form-group">
 										<label for="">Location</label>
-										<!--		          				<div class="form-field">-->
-										<!--		          					<div class="icon"><span class="fa fa-search"></span></div>-->
-										<!--				                <input type="text" class="form-control" placeholder="Location">-->
-										<select name="city" id="city" class="form-control" aria-label=".form-select-sm">
-											<option value="" selected>Chọn tỉnh thành</option>
-                                            <option th:each="location : ${listLocations}" th:value="${location.id}" th:text="${location.name}"></option>
-										</select>
+
+                                        <select name="listProperties" id="locations" class="form-control">
+                                            <option value="" disabled selected style="color:#1a1a1a">-- Chọn tỉnh thành --</option>
+                                            <th:block th:each="type : ${locations}">
+                                                <option th:value="${type.id}" th:text="${type.name}" style="color:#1a1a1a"></option>
+                                            </th:block>
+                                        </select>
 
 									</div>
 								</div>
-							</div>
-							<div class="col-lg align-items-end">
-								<div class="form-group">
-									<label for="">Price Limit</label>
-									<div class="form-field">
-										<div class="select-wrap">
-											<div class="icon"><span class="fa fa-chevron-down"></span></div>
-											<select name="" id="" class="form-control">
-												<option value="" style="color:#1a1a1a">Tất cả mức giá</option>
-												<option value="" style="color:#1a1a1a">Dưới 500 triệu</option>
-												<option value="" style="color:#1a1a1a">500 - 8000 triệu</option>
-												<option value="" style="color:#1a1a1a">800 - 1 tỷ</option>
-												<option value="" style="color:#1a1a1a">1 - 2 tỷ</option>
-											</select>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg align-self-end">
-								<div class="form-group">
-									<div class="form-field">
-										<input type="submit" value="Search" class="form-control btn btn-primary">
-									</div>
-								</div>
-							</div>
+
+                                <div class="col-lg align-items-end">
+                                    <div class="form-group">
+                                        <label for="">Price Limit</label>
+                                        <div class="form-field">
+                                            <div class="select-wrap">
+                                                <div class="icon"><span class="fa fa-chevron-down"></span></div>
+                                                <select name="" id="" class="form-control">
+                                                    <option value="" style="color:#1a1a1a">Tất cả mức giá</option>
+                                                    <option value="" style="color:#1a1a1a">Dưới 500 triệu</option>
+                                                    <option value="" style="color:#1a1a1a">500 - 8000 triệu</option>
+                                                    <option value="" style="color:#1a1a1a">800 - 1 tỷ</option>
+                                                    <option value="" style="color:#1a1a1a">1 - 2 tỷ</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg align-self-end">
+                                    <div class="form-group">
+                                        <div class="form-field">
+                                            <input type="submit" value="Search" class="form-control btn btn-primary">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+
 <!--					</div>-->
 					</form>
 				</div>

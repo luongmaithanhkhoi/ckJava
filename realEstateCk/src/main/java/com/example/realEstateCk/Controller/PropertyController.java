@@ -45,6 +45,11 @@ public class PropertyController {
         model.addAttribute("listProperties", properties);
         model.addAttribute("activePage", "properties");
 
+        List<Category> categories = categoryService.getAllCategories();
+        List<Location> locations = locationService.getAllLocations();
+
+        model.addAttribute("categories", categories);
+        model.addAttribute("locations", locations);
 
         return "properties";
     }
@@ -70,14 +75,14 @@ public class PropertyController {
         return "properties-single";
     }
 
-    @GetMapping("/property-search")
-    public String showSearchForm(Model model) {
-        List<Category> categories = categoryService.getAllCategories();
-        List<Location> locations = locationService.getAllLocations();
-
-        model.addAttribute("listProperties", categories);
-        model.addAttribute("listLocations", locations);
-        return "property-search";
-    }
+//    @GetMapping("/property-search")
+//    public String showSearchForm(Model model) {
+//        List<Category> categories = categoryService.getAllCategories();
+//        List<Location> locations = locationService.getAllLocations();
+//
+//        model.addAttribute("listProperties", categories);
+//        model.addAttribute("listLocations", locations);
+//        return "property-search";
+//    }
 
 }
