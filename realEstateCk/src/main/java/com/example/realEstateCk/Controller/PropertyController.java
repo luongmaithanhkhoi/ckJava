@@ -106,8 +106,19 @@ public class PropertyController {
         }
 
         Page<Property> properties = propertyService.findPropertiesByFilters(categoryId, locationId, minPrice, maxPrice, PageRequest.of(page, size));
+        System.out.println(
+                "properties: " + properties + "\n"
+                + "categoryId: " + categoryId + "\n"
+                + "locationId: " + locationId + "\n"
+                + "minPrice: " + minPrice + "\n"
+                + "maxPrice: " + maxPrice + "\n"
+        );
 
-        model.addAttribute("listProperties", properties.getContent());
+        if (properties.isEmpty()) {
+            model.addAttribute("errorMessage", "No properties found for the selected filters.");
+        }
+
+        model.addAttribute("listProperties", properties);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", properties.getTotalPages());
 

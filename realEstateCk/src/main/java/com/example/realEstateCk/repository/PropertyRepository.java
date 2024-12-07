@@ -14,6 +14,7 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
             "AND (:locationId IS NULL OR p.location.id = :locationId) " +
             "AND (:minPrice IS NULL OR p.price >= :minPrice) " +
             "AND (:maxPrice IS NULL OR p.price <= :maxPrice)")
+
     Page<Property> findPropertiesByFilters(
             @Param("categoryId") Long categoryId,
             @Param("locationId") Long locationId,

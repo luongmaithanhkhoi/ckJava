@@ -40,6 +40,10 @@ public class Property {
     private String acreage;
 
     @ManyToOne
+    @JoinColumn(name = "img_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "properties_ibfk_3"))
+    private PropertyImages propertyImage;
+
+    @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
@@ -48,7 +52,7 @@ public class Property {
     private User owner;
 
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PropertyImage> images;
+    private List<PropertyImages> images;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -142,11 +146,11 @@ public class Property {
         this.owner = owner;
     }
 
-    public List<PropertyImage> getImages() {
+    public List<PropertyImages> getImages() {
         return images;
     }
 
-    public void setImages(List<PropertyImage> images) {
+    public void setImages(List<PropertyImages> images) {
         this.images = images;
     }
 
@@ -156,5 +160,13 @@ public class Property {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public PropertyImages getPropertyImage() {
+        return propertyImage;
+    }
+
+    public void setPropertyImage(PropertyImages propertyImage) {
+        this.propertyImage = propertyImage;
     }
 }
