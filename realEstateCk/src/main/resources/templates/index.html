@@ -39,86 +39,93 @@
       </div>
     </section>
 
-    <section class="ftco-section ftco-no-pb ftco-no-pt search-bg">
-    	<div class="container">
-	    	<div class="row">
-					<div class="col-md-12">
-						<div class="search-wrap-1 ftco-animate p-4">
-							<form action="#" class="search-property-1">
-								<div class="row">
-									<div class="col-lg align-items-end">
-										<div class="form-group">
-											<label for="">Diện tích</label>
-											<div class="form-field">
-												<div class="icon"><span class="fa fa-search"></span></div>
-											<input type="text" class="form-control" placeholder="Enter Keyword">
-										  </div>
-										</div>
-									</div>
+    <section class="ftco-section ftco-no-pb ftco-no-pt">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="search-wrap-1 ftco-animate p-4">
+                        <form action="/properties/search" class="search-property-1">
+                            <div class="row">
+                                <div class="col-lg align-items-end">
+                                    <div class="form-group">
+                                        <label for="">Diện tích</label>
+                                        <div class="form-field">
+                                            <div class="icon"><span class="fa fa-search"></span></div>
+                                            <input type="text" class="form-control" placeholder="Enter Keyword">
+                                        </div>
+                                    </div>
+                                </div>
 
-								<div class="col-lg align-items-end">
-									<div class="form-group">
-										<label for="">Property Type</label>
-										<div class="form-field">
-										<div class="select-wrap">
-								  <div class="icon"><span class="fa fa-chevron-down"></span></div>
-	<!--		                      <select name="" id="a" class="form-control" th:each="property: ${listProperties}">-->
-	<!--		                        <option value="">Residence</option>-->
-	<!--		                        <option value="">Offices</option>-->
-	<!--		                        <option value="">Commercial</option>-->
-	<!--		                      </select>-->
-									<select name="listProperties" id="listProperties" class="form-control" th:field="*{listHomeProperties}">
-										<option value="" disabled selected style="color:#1a1a1a">-- Select Property Type --</option>
-										<option th:each="type : ${listHomeProperties}" th:value="${type.type}" th:text="${type.type}" style="color:#1a1a1a"></option>
-									</select>
+                                <div class="col-lg align-items-end">
+                                    <div class="form-group">
+                                        <label for="">Property Type</label>
+                                        <div class="form-field">
+                                            <div class="select-wrap">
+                                                <div class="icon"><span class="fa fa-chevron-down"></span></div>
 
-										</div>
-								  </div>
-							  </div>
-		        			</div>
-		        			<div class="col-lg align-items-end">
-		        				<div class="form-group">
-		        					<label for="">Location</label>
-<!--		          				<div class="form-field">-->
-<!--		          					<div class="icon"><span class="fa fa-search"></span></div>-->
-<!--				                <input type="text" class="form-control" placeholder="Location">-->
-									<select name="city" id="city" class="form-control" aria-label=".form-select-sm">
-										<option value="" selected>Chọn tỉnh thành</option>
-									</select>
+                                                <select name="categoryId" id="listCategories" class="form-control">
+                                                    <option value="" disabled selected style="color:#1a1a1a">-- Chọn loại nhà --</option>
+                                                    <th:block th:each="type : ${categories}">
+                                                        <option th:value="${type.id}" th:text="${type.name}" style="color:#1a1a1a"></option>
+                                                    </th:block>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-				              </div>
-			              </div>
-		        			</div>
-		        			<div class="col-lg align-items-end">
-		        				<div class="form-group">
-		        					<label for="">Price Limit</label>
-		        					<div class="form-field">
-		          					<div class="select-wrap">
-		                      <div class="icon"><span class="fa fa-chevron-down"></span></div>
-		                      <select name="" id="" class="form-control">
-		                        <option value="" style="color:#1a1a1a">Tất cả mức giá</option>
-		                        <option value="" style="color:#1a1a1a">Dưới 500 triệu</option>
-		                        <option value="" style="color:#1a1a1a">500 - 8000 triệu</option>
-		                        <option value="" style="color:#1a1a1a">800 - 1 tỷ</option>
-		                        <option value="" style="color:#1a1a1a">1 - 2 tỷ</option>
-		                      </select>
-		                    </div>
-				              </div>
-			              </div>
-		        			</div>
-		        			<div class="col-lg align-self-end">
-		        				<div class="form-group">
-		        					<div class="form-field">
-				                <input type="submit" value="Search" class="form-control btn btn-primary">
-				              </div>
-			              </div>
-		        			</div>
-<!--		        		</div>-->
-		        	</form>
-		        </div>
-					</div>
-	    	</div>
-	    </div>
+                                <div class="col-lg align-items-end">
+
+                                    <div class="form-group">
+                                        <label for="">Location</label>
+
+                                        <select name="locationId" id="locations" class="form-control">
+                                            <option value="" disabled selected style="color:#1a1a1a">-- Chọn tỉnh thành --</option>
+                                            <th:block th:each="type : ${locations}">
+                                                <option th:value="${type.id}" th:text="${type.name}" style="color:#1a1a1a"></option>
+                                            </th:block>
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-lg align-items-end">
+                                    <div class="form-group">
+                                        <label for="">Price Limit</label>
+                                        <div class="form-field">
+                                            <div class="select-wrap">
+                                                <div class="icon"><span class="fa fa-chevron-down"></span></div>
+                                                <select name="priceRange" id="" class="form-control">
+                                                    <option value="" style="color:#1a1a1a">Tất cả mức giá</option>
+                                                    <option value="0.0-500000000.0" style="color:#1a1a1a">Dưới 500 triệu</option>
+                                                    <option value="500000000.0-800000000.0" style="color:#1a1a1a">500 - 800 triệu</option>
+                                                    <option value="800000000.0-1000000000.0" style="color:#1a1a1a">800 - 1 tỷ</option>
+                                                    <option value="1000000000.0-2000000000.0" style="color:#1a1a1a">1 - 2 tỷ</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg align-self-end">
+                                    <div class="form-group">
+                                        <div class="form-field">
+                                            <input type="submit" value="Search" class="form-control btn btn-primary">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+
+                            <!--					</div>-->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section class="ftco-section ftco-no-pb ftco-no-pt bg-primary">
@@ -336,30 +343,42 @@
           </div>
         </div>
     		<div class="row">
-    			<div class="col-md-4">
-    				<a href="#" class="search-place img" style="background-image: url(/images/place-1.jpg);">
-							<div class="desc">
-								<h3><span>Miami</span></h3>
-								<span>24 Properties</span>
-							</div>
-    				</a>
-    			</div>
-    			<div class="col-md-4">
-    				<a href="#" class="search-place img" style="background-image: url(/images/place-2.jpg);">
-							<div class="desc">
-								<h3><span>Chicago</span></h3>
-								<span>20 Properties</span>
-							</div>
-    				</a>
-    			</div>
-    			<div class="col-md-4">
-    				<a href="#" class="search-place img" style="background-image: url(/images/place-3.jpg);">
-							<div class="desc">
-								<h3><span>Illinoi</span></h3>
-								<span>15 Properties</span>
-							</div>
-    				</a>
-    			</div>
+                <div th:each="city : ${topCities}" class="col-md-4">
+                    <a th:href="@{/properties/search(locationId=${city.locationId})}"
+                       class="search-place img"
+                       th:style="'background-image: url(' + ${city.image} + ');'">
+                        <div class="desc">
+                            <h3><span th:text="${city.cityName}">City Name</span></h3>
+                            <span th:text="${city.propertyCount + ' Properties'}">Property Count</span>
+                        </div>
+                    </a>
+                </div>
+
+
+<!--    			<div class="col-md-4">-->
+<!--    				<a href="#" class="search-place img" style="background-image: url(/images/place-1.jpg);">-->
+<!--							<div class="desc">-->
+<!--								<h3><span>Miami</span></h3>-->
+<!--								<span>24 Properties</span>-->
+<!--							</div>-->
+<!--    				</a>-->
+<!--    			</div>-->
+<!--    			<div class="col-md-4">-->
+<!--    				<a href="#" class="search-place img" style="background-image: url(/images/place-2.jpg);">-->
+<!--							<div class="desc">-->
+<!--								<h3><span>Chicago</span></h3>-->
+<!--								<span>20 Properties</span>-->
+<!--							</div>-->
+<!--    				</a>-->
+<!--    			</div>-->
+<!--    			<div class="col-md-4">-->
+<!--    				<a href="#" class="search-place img" style="background-image: url(/images/place-3.jpg);">-->
+<!--							<div class="desc">-->
+<!--								<h3><span>Illinoi</span></h3>-->
+<!--								<span>15 Properties</span>-->
+<!--							</div>-->
+<!--    				</a>-->
+<!--    			</div>-->
     		</div>
     	</div>
     </section>
@@ -476,97 +495,97 @@
     	</div>
     </section>
 
-    <section class="ftco-section testimony-section bg-light">
-      <div class="container">
-        <div class="row justify-content-center mb-5">
-          <div class="col-md-7 text-center heading-section ftco-animate">
-          	<span class="subheading">Testimonial</span>
-            <h2 class="mb-3">Happy Clients</h2>
-          </div>
-        </div>
-        <div class="row ftco-animate">
-          <div class="col-md-12">
-            <div class="carousel-testimony owl-carousel">
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                  <div class="text">
-                  	<span class="fa fa-quote-left"></span>
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                    	<div class="user-img" style="background-image: url(/images/person_1.jpg)"></div>
-                    	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
-		                  </div>
-	                  </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                  <div class="text">
-                  	<span class="fa fa-quote-left"></span>
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                    	<div class="user-img" style="background-image: url(/images/person_2.jpg)"></div>
-                    	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
-		                  </div>
-	                  </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                  <div class="text">
-                  	<span class="fa fa-quote-left"></span>
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                    	<div class="user-img" style="background-image: url(/images/person_3.jpg)"></div>
-                    	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
-		                  </div>
-	                  </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                  <div class="text">
-                  	<span class="fa fa-quote-left"></span>
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                    	<div class="user-img" style="background-image: url(/images/person_1.jpg)"></div>
-                    	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
-		                  </div>
-	                  </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap py-4">
-                  <div class="text">
-                  	<span class="fa fa-quote-left"></span>
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <div class="d-flex align-items-center">
-                    	<div class="user-img" style="background-image: url(/images/person_2.jpg)"></div>
-                    	<div class="pl-3">
-		                    <p class="name">Roger Scott</p>
-		                    <span class="position">Marketing Manager</span>
-		                  </div>
-	                  </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<!--    <section class="ftco-section testimony-section bg-light">-->
+<!--      <div class="container">-->
+<!--        <div class="row justify-content-center mb-5">-->
+<!--          <div class="col-md-7 text-center heading-section ftco-animate">-->
+<!--          	<span class="subheading">Testimonial</span>-->
+<!--            <h2 class="mb-3">Happy Clients</h2>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row ftco-animate">-->
+<!--          <div class="col-md-12">-->
+<!--            <div class="carousel-testimony owl-carousel">-->
+<!--              <div class="item">-->
+<!--                <div class="testimony-wrap py-4">-->
+<!--                  <div class="text">-->
+<!--                  	<span class="fa fa-quote-left"></span>-->
+<!--                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>-->
+<!--                    <div class="d-flex align-items-center">-->
+<!--                    	<div class="user-img" style="background-image: url(/images/person_1.jpg)"></div>-->
+<!--                    	<div class="pl-3">-->
+<!--		                    <p class="name">Roger Scott</p>-->
+<!--		                    <span class="position">Marketing Manager</span>-->
+<!--		                  </div>-->
+<!--	                  </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="item">-->
+<!--                <div class="testimony-wrap py-4">-->
+<!--                  <div class="text">-->
+<!--                  	<span class="fa fa-quote-left"></span>-->
+<!--                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>-->
+<!--                    <div class="d-flex align-items-center">-->
+<!--                    	<div class="user-img" style="background-image: url(/images/person_2.jpg)"></div>-->
+<!--                    	<div class="pl-3">-->
+<!--		                    <p class="name">Roger Scott</p>-->
+<!--		                    <span class="position">Marketing Manager</span>-->
+<!--		                  </div>-->
+<!--	                  </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="item">-->
+<!--                <div class="testimony-wrap py-4">-->
+<!--                  <div class="text">-->
+<!--                  	<span class="fa fa-quote-left"></span>-->
+<!--                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>-->
+<!--                    <div class="d-flex align-items-center">-->
+<!--                    	<div class="user-img" style="background-image: url(/images/person_3.jpg)"></div>-->
+<!--                    	<div class="pl-3">-->
+<!--		                    <p class="name">Roger Scott</p>-->
+<!--		                    <span class="position">Marketing Manager</span>-->
+<!--		                  </div>-->
+<!--	                  </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="item">-->
+<!--                <div class="testimony-wrap py-4">-->
+<!--                  <div class="text">-->
+<!--                  	<span class="fa fa-quote-left"></span>-->
+<!--                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>-->
+<!--                    <div class="d-flex align-items-center">-->
+<!--                    	<div class="user-img" style="background-image: url(/images/person_1.jpg)"></div>-->
+<!--                    	<div class="pl-3">-->
+<!--		                    <p class="name">Roger Scott</p>-->
+<!--		                    <span class="position">Marketing Manager</span>-->
+<!--		                  </div>-->
+<!--	                  </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="item">-->
+<!--                <div class="testimony-wrap py-4">-->
+<!--                  <div class="text">-->
+<!--                  	<span class="fa fa-quote-left"></span>-->
+<!--                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>-->
+<!--                    <div class="d-flex align-items-center">-->
+<!--                    	<div class="user-img" style="background-image: url(/images/person_2.jpg)"></div>-->
+<!--                    	<div class="pl-3">-->
+<!--		                    <p class="name">Roger Scott</p>-->
+<!--		                    <span class="position">Marketing Manager</span>-->
+<!--		                  </div>-->
+<!--	                  </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
 
     <section class="ftco-section ftco-agent">
     	<div class="container">

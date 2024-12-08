@@ -1,11 +1,17 @@
 package com.example.realEstateCk.Controller;
 
+import com.example.realEstateCk.model.Category;
+import com.example.realEstateCk.model.CityPropertyDTO;
+import com.example.realEstateCk.model.Location;
 import com.example.realEstateCk.model.Property;
+import com.example.realEstateCk.service.CategoryService;
+import com.example.realEstateCk.service.LocationService;
 import com.example.realEstateCk.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
+import java.util.Arrays;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
@@ -16,11 +22,39 @@ public class HomeController {
     @Autowired
     private PropertyService propertyService;
 
+    @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
+    private LocationService locationService;
+
     @GetMapping("/")
-    public String login(Model model) {
+    public String indexPage(Model model) {
         model.addAttribute("activePage", "home");
         List<Property> properties = (List<Property>)propertyService.getAllPropertyHome();
         model.addAttribute("listHomeProperties", properties);
+        List<Category> categories = categoryService.getAllCategories();
+        List<Location> locations = locationService.getAllLocations();
+
+        model.addAttribute("categories", categories);
+        model.addAttribute("locations", locations);
+
+
+        // Danh sách hình ảnh để gán cho mỗi thành phố
+        List<String> images = Arrays.asList("/images/place-1.jpg", "/images/place-2.jpg", "/images/place-3.jpg");
+        model.addAttribute("images", images);
+
+        // Lấy danh sách các thành phố có nhiều bất động sản
+        List<CityPropertyDTO> topCities = propertyService.getTopCitiesWithMostProperties();
+        // Cập nhật image cho từng city
+        for (int i = 0; i < topCities.size(); i++) {
+            String image = "/images/place-" + (i % 3 + 1) + ".jpg";  // Lặp lại từ place-1 đến place-3
+            topCities.get(i).setImage(image);
+        }
+
+        model.addAttribute("topCities", topCities);
+
+
         return "index";
     }
 
