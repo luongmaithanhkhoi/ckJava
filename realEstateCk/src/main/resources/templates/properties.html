@@ -133,6 +133,14 @@
             <h2 class="mb-2">Properties</h2>
           </div>
         </div>
+
+        <!-- Hiển thị thông báo nếu không có sản phẩm nào -->
+        <div th:if="${errorMessage}">
+            <div class="alert alert-warning" role="alert">
+                <span th:text="${errorMessage}"></span>
+            </div>
+        </div>
+
         <div class="row">
 <!--            <div th:replace="property-product"></div>-->
             <th:block th:each="properties: ${listProperties}">
@@ -167,9 +175,7 @@
                 </div>
             </th:block>
 
-            <div th:if="${#lists.isEmpty(listProperties)}">
-                <p>No properties found for the selected filters.</p>
-            </div>
+
 
         </div>
 <!--            <div class="row mt-5">-->
@@ -189,29 +195,31 @@
 <!--                    </div>-->
 <!--                </div>-->
 
-                <div class="row mt-5">
-                    <div class="col text-center">
-                        <div class="block-27">
-                            <ul>
-                                <!-- Previous Page -->
-                                <li th:if="${currentPage > 0}">
-                                    <a th:href="@{/properties/search(page=${currentPage - 1}, size=6, categoryId=${categoryId}, locationId=${locationId}, priceRange=${priceRange})}">&lt;</a>
-                                </li>
+            <div class="row mt-5">
+                <div class="col text-center">
+                    <div class="block-27">
+                        <!-- Chỉ hiển thị phần phân trang nếu có ít nhất một trang -->
+                        <ul th:if="${totalPages > 0}">
+                            <!-- Previous Page -->
+                            <li th:if="${currentPage > 0}">
+                                <a th:href="@{/properties/search(page=${currentPage - 1}, size=6, categoryId=${categoryId}, locationId=${locationId}, priceRange=${priceRange})}">&lt;</a>
+                            </li>
 
-                                <!-- Page Numbers -->
-                                <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:classappend="${i == currentPage} ? 'active'">
-                                    <a th:href="@{/properties/search(page=${i}, size=6, categoryId=${categoryId}, locationId=${locationId}, priceRange=${priceRange})}" th:text="${i + 1}"></a>
-                                </li>
+                            <!-- Page Numbers -->
+                            <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:classappend="${i == currentPage} ? 'active'">
+                                <a th:href="@{/properties/search(page=${i}, size=6, categoryId=${categoryId}, locationId=${locationId}, priceRange=${priceRange})}" th:text="${i + 1}"></a>
+                            </li>
 
-                                <!-- Next Page -->
-                                <li th:if="${currentPage < totalPages - 1}">
-                                    <a th:href="@{/properties/search(page=${currentPage + 1}, size=6, categoryId=${categoryId}, locationId=${locationId}, priceRange=${priceRange})}">&gt;</a>
-                                </li>
-                            </ul>
-                        </div>
+                            <!-- Next Page -->
+                            <li th:if="${currentPage < totalPages - 1}">
+                                <a th:href="@{/properties/search(page=${currentPage + 1}, size=6, categoryId=${categoryId}, locationId=${locationId}, priceRange=${priceRange})}">&gt;</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
+
+        </div>
 
 
 
