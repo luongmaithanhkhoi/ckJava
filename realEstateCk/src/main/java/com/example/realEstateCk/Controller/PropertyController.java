@@ -58,14 +58,21 @@ public class PropertyController {
     @GetMapping("/properties/{id}")
     public String detailsProperty(@PathVariable("id") Long id, Model model) {
         Property property = propertyService.getPropertyById(id);
-        model.addAttribute("property", property);
-        model.addAttribute("activePage", "properties");
-        PropertyDetails  propertyDetails = propertyDetailsService.getPropertyDetailsById(property.getId());
-        if(propertyDetails != null) {
-            model.addAttribute("propertyDetails", propertyDetails);
-        } else {
-            model.addAttribute("propertyDetails", null);
+
+        if (property == null) {
+            // Nếu không tìm thấy Property, chuyển hướng hoặc hiển thị trang lỗi
+            return "redirect:/properties?error=not-found";
         }
+
+        // Truyền toàn bộ đối tượng Property sang View
+        model.addAttribute("property", property);
+
+        // Truyền thêm dữ liệu chi tiết nếu có
+        PropertyDetails propertyDetails = propertyDetailsService.getPropertyDetailsById(property.getId());
+        model.addAttribute("propertyDetails", propertyDetails != null ? propertyDetails : null);
+
+
+        model.addAttribute("activePage", "properties");
 
         return "properties-single";
     }
@@ -121,6 +128,7 @@ public class PropertyController {
         model.addAttribute("listProperties", properties);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", properties.getTotalPages());
+        model.addAttribute("activePage", "properties");
 
         List<Category> categories = categoryService.getAllCategories();
         List<Location> locations = locationService.getAllLocations();

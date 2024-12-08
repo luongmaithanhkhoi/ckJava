@@ -17,6 +17,8 @@
     
     <link rel="stylesheet" href="/css/flaticon.css">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   </head>
   <body>
 
@@ -44,34 +46,19 @@
 		  <div class="row justify-content-center">
 			  <div class="col-md-12">
 				  <div class="property-details">
-					  <div class="img" style="background-image: url(/images/work-1.jpg);">
+					  <div class="img" th:style="'background-image: url(' + ${property.propertyImage.imageUrl} + ');'">
 						  <a href="https://vimeo.com/45830194" class="img-video popup-vimeo d-flex align-items-center justify-content-center">
 							  <span class="fa fa-play"></span>
 						  </a>
 					  </div>
 					  <div class="text">
-						  <span class="subheading">Oakland</span>
-						  <h2>The Blue Sky Home</h2>
+						  <span class="location" th:text="${property.location.name}"></span>
+						  <h2 th:text="${property.title}"></h2>
 					  </div>
 				  </div>
 			  </div>
 		  </div>
 
-<!--      	<div class="row justify-content-center">-->
-<!--      		<div class="col-md-12">-->
-<!--      			<div class="property-details">-->
-<!--      				<div class="img" style="background-image: url(/images/work-1.jpg);">-->
-<!--      					<a href="https://vimeo.com/45830194" class="img-video popup-vimeo d-flex align-items-center justify-content-center">-->
-<!--			          	<span class="fa fa-play"></span>-->
-<!--			          </a>-->
-<!--      				</div>-->
-<!--      				<div class="text">-->
-<!--      					<span class="subheading">Oakland</span>-->
-<!--      					<h2>The Blue Sky Home</h2>-->
-<!--      				</div>-->
-<!--      			</div>-->
-<!--      		</div>-->
-<!--      	</div>-->
       	<div class="row">
       		<div class="col-md-12 pills">
 						<div class="bd-example bd-example-tabs">
@@ -95,16 +82,28 @@
 						    	<div class="row">
 						    		<div class="col-md-4">
 						    			<ul class="features">
-						    				<li class="check"><span class="fa fa-check-circle"></span>Lot Area: 1,250 SQ FT</li>
-						    				<li class="check"><span class="fa fa-check-circle"></span>Bed Rooms: 4</li>
-						    				<li class="check"><span class="fa fa-check-circle"></span>Bath Rooms: 4</li>
-						    				<li class="check"><span class="fa fa-check-circle"></span>Luggage</li>
-						    				<li class="check"><span class="fa fa-check-circle"></span>Garage: 2</li>
+						    				<li class="check" th:inline="text">
+												<span class="fa fa-check-circle"></span>Type: [[${propertyDetails.stype}]]
+											</li>
+											<li class="check" th:inline="text">
+												<span class="fa fa-check-circle"></span> Bed Rooms:[[${propertyDetails.bedroom}]]
+											</li>
+											<li class="check" th:inline="text">
+												<span class="fa fa-check-circle"></span> Bath Rooms:[[${propertyDetails.bathroom}]]
+											</li>
+											<li class="check" th:inline="text">
+												<span class="fa fa-check-circle"></span> Kitchen:[[${propertyDetails.kitchen}]]
+											</li>
+											<li class="check" th:inline="text">
+												<span class="fa fa-check-circle"></span> Hall:[[${propertyDetails.hall}]]
+											</li>
 						    			</ul>
 						    		</div>
 						    		<div class="col-md-4">
 						    			<ul class="features">
-						    				<li class="check"><span class="fa fa-check-circle"></span>Floor Area: 1,300 SQ FT</li>
+											<li class="check" th:inline="text">
+												<span class="fa fa-check-circle"></span> Hall:[[${propertyDetails.hall}]]
+											</li>
 						    				<li class="check"><span class="fa fa-check-circle"></span>Year Build:: 2019</li>
 						    				<li class="check"><span class="fa fa-check-circle"></span>Water</li>
 						    				<li class="check"><span class="fa fa-check-circle"></span>Stories: 2</li>
@@ -124,7 +123,7 @@
 						    </div>
 
 						    <div class="tab-pane fade" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
-						      <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+						      <p th:text="${propertyDetails.pcontent}"></p>
 									<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
 						    </div>
 
@@ -257,6 +256,11 @@
 							   		</div>
 							   	</div>
 						    </div>
+							  <div class="row justify-content-center">
+								  <div class="col-md-8">
+									  <div id="map" class="bg-white"></div>
+								  </div>
+							  </div>
 						  </div>
 						</div>
 		      </div>
