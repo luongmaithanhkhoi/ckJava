@@ -2,6 +2,8 @@ package com.example.realEstateCk.service;
 
 
 import com.example.realEstateCk.model.User;
+
+import java.security.Principal;
 import java.util.List;
 
 public interface UserService {
@@ -21,7 +23,8 @@ public interface UserService {
     List<User> findAll();
 
     boolean verifyUser(String code);
-
+    User findByEmail(String email);
+    boolean changePassword(Principal connectedUser, String currentPassword, String newPassword, String confirmPassword);
 
 
 }

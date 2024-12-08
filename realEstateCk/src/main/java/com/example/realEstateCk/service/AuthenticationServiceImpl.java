@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -70,19 +72,40 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .build();
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return new AuthenticationResponse(null, null);
         }
-        return new AuthenticationResponse(null, null);
+
     }
 
     @Override
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                request.getUsername(), request.getPassword()));
-        User user = userRepository.findByUsername(request.getUsername()).orElseThrow();
-        String jwtToken = jwtService.generateToken(user);
-        return null;
+        try{
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.getUsername(), request.getPassword()));
+
+            User user = userRepository.findByUsername(request.getUsername()).orElseThrow();
+            String jwtToken = jwtService.generateToken(user);
+
+            Token token = Token.builder()
+                    .userId(user.getId())
+                    .token(jwtToken)
+                    .expired(false)
+                    .revoked(false)
+                    .build();
+            tokenRepository.save(token);
+            return AuthenticationResponse.builder()
+                    .user(user)
+                    .token(jwtToken)
+                    .build();
+        }catch (AuthenticationException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
     }
+
+
 
     @Override
     public boolean forgotPassword(String email) {

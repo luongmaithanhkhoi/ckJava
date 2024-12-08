@@ -8,14 +8,11 @@
         <title>Login and Signup Form </title>
 
         <!-- CSS -->
-        <link rel="stylesheet" href="/css/login_style.css">
+        <link rel="stylesheet" href="/login_test/login_style.css">
                 
         <!-- Boxicons CSS -->
         <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     </head>
     <body>
 
@@ -23,13 +20,13 @@
             <div class="form login">
                 <div class="form-content">
                     <header>Login</header>
-                    <form action="#">
+                    <form action="/api/auth/authenticate" method="post">
                         <div class="field input-field">
-                            <input type="text" placeholder="Username" class="input">
+                            <input type="text" name="username" placeholder="Username" class="input">
                         </div>
 
                         <div class="field input-field">
-                            <input type="password" placeholder="Password" class="password">
+                            <input type="password" name="password" placeholder="Password" class="password">
                             <i class='bx bx-hide eye-icon'></i>
                         </div>
 
@@ -38,7 +35,7 @@
                         </div>
 
                         <div class="field button-field">
-                            <button>Login</button>
+                            <button type="submit">Login</button>
                         </div>
                     </form>
 
@@ -126,7 +123,7 @@
         </section>
 
         <!-- JavaScript -->
-        <script src="/js/login_script.js"></script>
+        <script src="/login_test/login_script.js"></script>
     </body>
 
 

@@ -20,6 +20,7 @@ public class Token {
     public String tokenType = "Bearer";
     public boolean expired;
     public boolean revoked;
+
     public Long userId;
 
 }

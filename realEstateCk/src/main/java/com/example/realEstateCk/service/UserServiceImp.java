@@ -4,14 +4,19 @@ package com.example.realEstateCk.service;
 import com.example.realEstateCk.model.User;
 import com.example.realEstateCk.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 
 @Service
 public class UserServiceImp implements UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Override
     public User updateUser(Long id, User user) {
         User existUser = userRepository.findById(id).orElse(null);
@@ -26,6 +31,11 @@ public class UserServiceImp implements UserService {
     @Override
     public void deleteAccount(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     @Override
@@ -68,6 +78,25 @@ public class UserServiceImp implements UserService {
         }
 
         return false;
+    }
+    @Override
+    public boolean changePassword(Principal connectedUser, String currentPassword, String newPassword, String confirmPassword){
+        try{
+            User user = (User) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
+
+            if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
+                throw new IllegalStateException("Wrong password");
+            }
+            if (!newPassword.equals(confirmPassword)) {
+                throw new IllegalStateException("Password are not the same");
+            }
+
+            user.setPassword(passwordEncoder.encode(newPassword));
+            userRepository.save(user);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
 

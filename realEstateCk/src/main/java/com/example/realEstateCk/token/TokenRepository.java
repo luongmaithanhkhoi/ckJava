@@ -2,6 +2,8 @@ package com.example.realEstateCk.token;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TokenRepository extends JpaRepository<Token, Integer> {
+import java.util.Optional;
 
+public interface TokenRepository extends JpaRepository<Token, Integer> {
+    Optional<Token> findByToken(String token);
 }

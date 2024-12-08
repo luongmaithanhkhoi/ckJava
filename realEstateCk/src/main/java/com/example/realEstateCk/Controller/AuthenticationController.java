@@ -6,11 +6,18 @@ import com.example.realEstateCk.utils.AuthenticationRequest;
 import com.example.realEstateCk.utils.AuthenticationResponse;
 import com.example.realEstateCk.utils.RegisterRequest;
 import com.example.realEstateCk.service.AuthenticationService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
+
+import java.io.IOException;
 
 @RequestMapping("/api/auth/")
 @Controller
@@ -23,6 +30,13 @@ public class AuthenticationController {
     public String register() {
         return "login";
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+
     @PostMapping("/register")
     @ResponseBody
     public String register(@ModelAttribute("registerRequest") RegisterRequest registerRequest) {
@@ -35,9 +49,14 @@ public class AuthenticationController {
         }
     }
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
-        return ResponseEntity.ok(authenticationService.authenticate(request));
+    public RedirectView authenticate(@ModelAttribute("authenticationRequest") AuthenticationRequest request) {
+        AuthenticationResponse authenticationResponse = authenticationService.authenticate(request);
+        if(authenticationResponse != null){
+            return new RedirectView("/home");
+        }
+        return new RedirectView("/api/auth/login");
     }
+
 
     @GetMapping("/verify")
     @ResponseBody
@@ -48,5 +67,6 @@ public class AuthenticationController {
         userRepository.save(user);
         return "Success";
     }
+
 
 }
