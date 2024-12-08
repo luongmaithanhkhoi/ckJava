@@ -136,6 +136,11 @@ public class PropertyController {
         model.addAttribute("categories", categories);
         model.addAttribute("locations", locations);
 
+        // Thêm các tham số lọc vào model để tiếp tục hiển thị bộ lọc
+        model.addAttribute("categoryId", categoryId);
+        model.addAttribute("locationId", locationId);
+        model.addAttribute("priceRange", priceRange);
+
         return "properties";
     }
 

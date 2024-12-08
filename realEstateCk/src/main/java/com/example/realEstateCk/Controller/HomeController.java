@@ -32,6 +32,11 @@ public class HomeController {
     public String indexPage(Model model) {
         model.addAttribute("activePage", "home");
         List<Property> properties = (List<Property>)propertyService.getAllPropertyHome();
+
+        // Giới hạn chỉ lấy 8 sản phẩm
+        int limit = Math.min(8, properties.size());
+        properties = properties.subList(0, limit);
+
         model.addAttribute("listHomeProperties", properties);
         List<Category> categories = categoryService.getAllCategories();
         List<Location> locations = locationService.getAllLocations();
