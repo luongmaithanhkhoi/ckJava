@@ -22,10 +22,14 @@
                 <div class="card bg-gradient-danger card-img-holder text-white">
                   <div class="card-body">
                     <img src="/Admin/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-3">Weekly Sales <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                    <h4 class="font-weight-normal mb-3">Tin đăng <i class="mdi mdi-chart-line mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-5">$ 15,0000</h2>
-                    <h6 class="card-text">Increased by 60%</h6>
+                    <h2 class="mb-5" th:text="${total} + ' tin'"></h2>
+                    <h4 class="card-text">Đang hiển thị</h4>
+<!--                    <button href="#" class="btn btn-link" type="button">Đăng tin</button>-->
+                    <a href="/#">
+                      <i></i> Đăng tin >
+                    </a>
                   </div>
                 </div>
               </div>
@@ -33,7 +37,7 @@
                 <div class="card bg-gradient-info card-img-holder text-white">
                   <div class="card-body">
                     <img src="/Admin/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-3">Weekly Orders <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+                    <h4 class="font-weight-normal mb-3">Liên hệ trong 30 ngày <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
                     </h4>
                     <h2 class="mb-5">45,6334</h2>
                     <h6 class="card-text">Decreased by 10%</h6>
@@ -45,9 +49,12 @@
                 <div class="card bg-gradient-success card-img-holder text-white">
                   <div class="card-body">
                     <img src="/Admin/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-3">Số dư tài khoản<i class="mdi mdi-diamond mdi-24px float-right"></i>
+                    <h4 class="font-weight-normal mb-3" >Số dư tài khoản<i class="mdi mdi-diamond mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-5" >so du tai khoan</h2>
+                    <h2 class="mb-5" th:text="${formattedMoney}"></h2>
+                    <a href="/seller/addMoney">
+                      <i></i> Nạp tiền >
+                    </a>
                     <h6 class="card-text"></h6>
                   </div>
                 </div>

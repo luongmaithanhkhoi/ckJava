@@ -1,0 +1,158 @@
+<div th:replace="fragments/headerAdmin"></div>
+<!-- partial -->
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title"> Thông tin các tin đăng </h3>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <form th:action="@{/propertiesList/details/edit/{id}(id=${property.id})}" th:object="${propertyDetails}" method="post">
+              <!-- Input ẩn để gửi ID -->
+              <div class="form-group">
+                <label >Tên liên hệ</label>
+                <input type="text" name="tenlienhe" class="form-control"  placeholder="Tên liên hệ" required  th:field="*{namecontract}">
+                <p class="text-danger" th:if="${#fields.hasErrors('namecontract')}" th:errors="*{namecontract}"></p>
+              </div>
+
+              <div class="form-group">
+                <label for="">Email liên hệ</label>
+                <input type="text" class="form-control"  placeholder="Email liên hệ" required  th:field="*{emailcontract}">
+                <p class="text-danger" th:if="${#fields.hasErrors('emailcontract')}" th:errors="*{emailcontract}"></p>
+              </div>
+
+              <div class="form-group">
+                <label for="">Số điện thoại liên hệ</label>
+                <input type="text" class="form-control"  placeholder="Số điện thoại liên hệ" required  th:field="*{phonecontract}">
+                <p class="text-danger" th:if="${#fields.hasErrors('phonecontract')}" th:errors="*{phonecontract}"></p>
+              </div>
+              <div class="form-group">
+                <label>Đại chỉ bất động sản</label>
+                <!--                    <input type="text" class="form-control"  placeholder="địa chỉ bất động sản" required>-->
+                <br><label for="city">Thành phố</label>
+                <select name="city" id="city" class="form-control" aria-label=".form-select-sm"  th:field="*{city}">
+                  <option value="" selected>Chọn tỉnh thành</option>
+                </select>
+                <br><label for="district">Huyện</label>
+                <select name="district" class="form-control" aria-label=".form-select-sm" id="district" th:field="*{state}">
+                  <option value="" selected>Chọn quận huyện</option>
+                </select>
+                <br><label for="ward">Xã</label>
+                <select name="ward" class="form-control" id="ward" aria-label=".form-select-sm" th:field="*{type}">
+                  <option value="" selected>Chọn phường xã</option>
+                </select>
+                <br><label>Số nhà đường</label>
+                <input type="text" class="form-control"  placeholder="số nhà đường" required th:field="*{location}">
+              </div>
+
+              <!--                <div class="form-group">-->
+              <!--                  <label for="exampleInputInfor">Mô tả</label>-->
+              <!--                  <input type="text" class="form-control" id="exampleInputInfor" placeholder="Mô tả thông tin dự án">-->
+              <!--                </div>-->
+
+              <div class="form-group">
+                <label for="exampleTextarea1">Miêu tả</label>
+                <textarea class="form-control" id="exampleTextarea1" rows="4" th:field="*{pcontent}"></textarea>
+                <p class="text-danger" th:if="${#fields.hasErrors('pcontent')}" th:errors="*{pcontent}"></p>
+              </div>
+
+              <div class="form-group">
+                <label for="">Giấy tờ pháp lý</label>
+                <select class="form-control" id="" th:field="*{bhk}">
+                  <option value="0">Sổ đỏ/ Sổ hồng</option>
+                  <option value="1">Hợp đồng mua bán</option>
+                  <option value="1">Đang chờ sổ</option>
+                </select>
+                <p class="text-danger" th:if="${#fields.hasErrors('bhk')}" th:errors="*{bhk}"></p>
+                <!--                <label for="a">Giấy tờ pháp lý</label>-->
+                <!--                <input type="text" class="form-control"  placeholder="Giấy tờ pháp lý">-->
+              </div>
+
+              <div class="form-group">
+                <label >Số phòng ngủ</label>
+                <input type="number" class="form-control"  placeholder="Số phòng ngủ"  th:field="*{bedroom}">
+                <p class="text-danger" th:if="${#fields.hasErrors('bedroom')}" th:errors="*{bedroom}"></p>
+              </div>
+
+              <div class="form-group">
+                <label >Số phòng tắm</label>
+                <input type="number" class="form-control"  placeholder="Số phòng ngủ"  th:field="*{bathroom}">
+                <p class="text-danger" th:if="${#fields.hasErrors('bathroom')}" th:errors="*{bathroom}"></p>
+              </div>
+
+              <div class="form-group">
+                <label >Số bếp</label>
+                <input type="number" class="form-control" placeholder="Số bếp" th:field="*{kitchen}">
+                <p class="text-danger" th:if="${#fields.hasErrors('kitchen')}" th:errors="*{kitchen}"></p>
+              </div>
+
+              <div class="form-group">
+                <label >Hướng ban công</label>
+                <select class="form-control" th:field="*{balcony}">
+                  <option value="0">Đông</option>
+                  <option value="1">Tây</option>
+                  <option value="2">Nam</option>
+                  <option value="3">Bắc</option>
+                </select>
+                <p class="text-danger" th:if="${#fields.hasErrors('balcony')}" th:errors="*{balcony}"></p>
+              </div>
+
+              <div class="form-group">
+                <label >Số tầng</label>
+                <input type="number" class="form-control" placeholder="Số tầng" th:field="*{totalfloor}">
+                <p class="text-danger" th:if="${#fields.hasErrors('totalfloor')}" th:errors="*{totalfloor}"></p>
+              </div>
+              <button type="submit" class="btn btn-gradient-primary me-2" >Đăng</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div th:replace="fragments/footerAdmin"></div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+  <script>
+    var citis = document.getElementById("city");
+    var districts = document.getElementById("district");
+    var wards = document.getElementById("ward");
+    var Parameter = {
+      url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+      method: "GET",
+      responseType: "application/json",
+    };
+    var promise = axios(Parameter);
+    promise.then(function (result) {
+      renderCity(result.data);
+    });
+
+    function renderCity(data) {
+      for (const x of data) {
+        citis.options[citis.options.length] = new Option(x.Name, x.Id);
+      }
+      citis.onchange = function () {
+        district.length = 1;
+        ward.length = 1;
+        if(this.value != ""){
+          const result = data.filter(n => n.Id === this.value);
+
+          for (const k of result[0].Districts) {
+            district.options[district.options.length] = new Option(k.Name, k.Id);
+          }
+        }
+      };
+      district.onchange = function () {
+        ward.length = 1;
+        const dataCity = data.filter((n) => n.Id === citis.value);
+        if (this.value != "") {
+          const dataWards = dataCity[0].Districts.filter(n => n.Id === this.value)[0].Wards;
+
+          for (const w of dataWards) {
+            wards.options[wards.options.length] = new Option(w.Name, w.Id);
+          }
+        }
+      };
+    }
+  </script>

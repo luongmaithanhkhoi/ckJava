@@ -1,0 +1,87 @@
+<div th:replace="fragments/headerAdmin"></div>
+<!-- partial -->
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title"> Thông tin các tin đăng </h3>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <form th:action="@{/propertiesList/edit/{id}(id=${property.id})}" th:object="${property}" method="post">
+                            <!-- Input ẩn để gửi ID -->
+                            <input type="hidden" th:field="*{id}" />
+
+                            <!-- Tên -->
+                            <div class="form-group">
+                                <label for="title">Tên</label>
+                                <input type="text" id="title" class="form-control" th:field="*{title}" placeholder="Nhập tên" required />
+                            </div>
+
+                            <!-- Miêu tả -->
+                            <div class="form-group">
+                                <label for="description">Miêu tả</label>
+                                <textarea id="description" class="form-control" th:field="*{description}" placeholder="Nhập miêu tả" required></textarea>
+                            </div>
+
+                            <!-- Giá -->
+                            <div class="form-group">
+                                <label for="price">Giá</label>
+                                <input type="number" id="price" class="form-control" th:field="*{price}" placeholder="Nhập giá" required />
+                            </div>
+
+                            <!-- Địa chỉ -->
+                            <div class="form-group">
+                                <label for="location">Địa chỉ</label>
+                                <input type="text" id="location" class="form-control" th:field="*{location}" placeholder="Nhập địa chỉ" required />
+                            </div>
+
+                            <!-- Diện tích -->
+                            <div class="form-group">
+                                <label for="acreage">Diện tích</label>
+                                <input type="number" id="acreage" class="form-control" th:field="*{acreage}" placeholder="Nhập diện tích" required />
+                            </div>
+
+                            <!-- Phương thức -->
+                            <div class="form-group">
+                                <label for="method">Phương thức</label>
+                                <select id="method" class="form-control" th:field="*{method}" required>
+                                    <option value="0" th:selected="*{method == 0}">Bán</option>
+                                    <option value="1" th:selected="*{method == 1}">Thuê</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="listcategory">Loại</label>
+                                <select name="listcategory" id="listcategory" class="form-control" th:field="*{category}">
+                                    <option value="" disabled selected style="color:#1a1a1a">-- Select Property Type --</option>
+                                    <option th:each="type : ${categoryList}" th:value="${type.id}" th:text="${type.name}" style="color:#1a1a1a"></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="s">Thanh toán đăng bài</label>
+                                <br>
+                                <span id="s" th:text="*{type}"></span> <!-- Hiển thị giá trị type -->
+                                <input type="hidden" th:field="*{type}" /> <!-- Gửi giá trị type về controller -->
+                            </div>
+                            <!-- Trạng thái -->
+                            <div class="form-group">
+                                <label for="status">Trạng thái</label>
+                                <input type="text" id="status" class="form-control" th:field="*{status}" placeholder="Nhập trạng thái" required />
+
+                            </div>
+
+                            <!-- Nút Lưu -->
+                            <button type="submit" class="btn btn-primary">Cập nhật</button>
+                            <a href="/propertiesList" class="btn btn-light">
+                                <i class="fas fa-arrow-left"></i> Cancel
+                            </a>
+                        </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="fragments/footerAdmin"></div>
+</div>

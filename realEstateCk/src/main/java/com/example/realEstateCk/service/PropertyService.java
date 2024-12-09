@@ -9,4 +9,7 @@ public interface PropertyService {
     public Iterable<Property> findByNameContainingAndDescriptionContaining(String name, String description);
     public Iterable<Property> getAllProperty();
     public Property getPropertyById(Long id);
+    public Iterable<Property> findByOwnerId(Long ownerId);
+    public Property save(Property property);
+    public void deleteById(Long id);
 }

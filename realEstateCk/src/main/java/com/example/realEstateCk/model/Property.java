@@ -35,6 +35,9 @@ public class Property {
     @Column(nullable = false)
     private String acreage;
 
+    @Column(nullable = false, columnDefinition = "INT DEFAULT 0")
+    private int method = 0; // Giá trị mặc định
+
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
@@ -57,6 +60,13 @@ public class Property {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    public int getMethod() {
+        return method;
+    }
+
+    public void setMethod(int method) {
+        this.method = method;
     }
 
     public String getAcreage() {

@@ -86,7 +86,7 @@ public class PayPalController {
                 String paymentStatus = payment.getState();
                 String orderId = payment.getTransactions().get(0).getInvoiceNumber();  // Sử dụng invoice number (nếu có)
                 String transactionDetails = payment.getTransactions().get(0).getDescription();
-                Long id = 3L;
+                Long id = 1L;
                 payPalTransactionService.saveTransaction(paymentId, payerId, payerEmail, transactionId, amount, currencyCode, paymentStatus, orderId, transactionDetails, id);
                 User addMoneyUser = userService.findById(id);
                 Long totalMoney = addMoneyUser.getMoney() + convertUsdToVnd(amount);
@@ -102,12 +102,12 @@ public class PayPalController {
     }
 
         // Function to convert USD to VND
-        public static long convertUsdToVnd(BigDecimal usdAmount) {
-            // Define the exchange rate (e.g., 1 USD = 25,000 VND)
-            BigDecimal exchangeRate = new BigDecimal("25000.0");
-            BigDecimal vndAmount = usdAmount.multiply(exchangeRate);
-            return vndAmount.longValue();
-        }
+    public static long convertUsdToVnd(BigDecimal usdAmount) {
+        // Define the exchange rate (e.g., 1 USD = 25,000 VND)
+        BigDecimal exchangeRate = new BigDecimal("25000.0");
+        BigDecimal vndAmount = usdAmount.multiply(exchangeRate);
+        return vndAmount.longValue();
+    }
 
 
     @GetMapping("/cancel")

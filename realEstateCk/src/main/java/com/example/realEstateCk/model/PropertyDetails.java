@@ -11,8 +11,7 @@ public class PropertyDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob
-    @Column(name = "pcontent", nullable = false)
+    @Column(name = "pcontent", nullable = false, columnDefinition = "LONGTEXT")
     private String pcontent;
 
     @Column(name = "type", nullable = false)
@@ -31,7 +30,7 @@ public class PropertyDetails {
     private int bathroom;
 
     @Column(name = "balcony", nullable = false)
-    private int balcony;
+    private String balcony;
 
     @Column(name = "kitchen", nullable = false)
     private int kitchen;
@@ -57,11 +56,62 @@ public class PropertyDetails {
     @Column(name = "totalfloor", nullable = false)
     private String totalfloor;
 
+    @Column(name = "namecontract", nullable = false)
+    private String namecontract;
+    @Column(name = "phonecontract", nullable = false)
+    private String phonecontract;
+    @Column(name = "emailcontract", nullable = false)
+    private String emailcontract;
+    @Column(name = "methodpost", nullable = false)
+    private String methodpost;
+    @Column(name = "time", nullable = false)
+    private int time;
+
     @ManyToOne
     @JoinColumn(name = "properties_id", referencedColumnName = "id", nullable = false)
     private Property properties;
 
     // Getters and Setters
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
+    public String getMethodpost() {
+        return methodpost;
+    }
+
+    public void setMethodpost(String methodpost) {
+        this.methodpost = methodpost;
+    }
+
+    public String getPhonecontract() {
+        return phonecontract;
+    }
+
+    public void setPhonecontract(String phonecontract) {
+        this.phonecontract = phonecontract;
+    }
+
+    public String getEmailcontract() {
+        return emailcontract;
+    }
+
+    public void setEmailcontract(String emailcontract) {
+        this.emailcontract = emailcontract;
+    }
+
+    public String getNamecontract() {
+        return namecontract;
+    }
+
+    public void setNamecontract(String namecontract) {
+        this.namecontract = namecontract;
+    }
+
     public Long getId() {
         return id;
     }
@@ -118,11 +168,11 @@ public class PropertyDetails {
         this.bathroom = bathroom;
     }
 
-    public int getBalcony() {
+    public String getBalcony() {
         return balcony;
     }
 
-    public void setBalcony(int balcony) {
+    public void setBalcony(String balcony) {
         this.balcony = balcony;
     }
 

@@ -19,7 +19,7 @@ public class Transaction {
     private Property property;
 
     @ManyToOne
-    @JoinColumn(name = "buyer_id", nullable = false)
+    @JoinColumn(name = "buyer_id")
     private User buyer;
 
     @ManyToOne

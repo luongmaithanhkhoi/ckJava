@@ -39,4 +39,21 @@ public class PropertyServiceImpl implements PropertyService {
     public Property getPropertyById(Long id) {
         return propertyRepository.findById(id).get();
     }
+
+    @Override
+    public Iterable<Property> findByOwnerId(Long ownerId) {
+        return propertyRepository.findByOwnerId(ownerId);
+    }
+
+    @Override
+    public Property save(Property property) {
+        return propertyRepository.save(property);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+         propertyRepository.deleteById(id);
+    }
+
+
 }

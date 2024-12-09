@@ -1,0 +1,83 @@
+<div th:replace="fragments/headerAdmin"></div>
+<!-- partial -->
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title"> Thông tin các tin đăng </h3>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body table-responsive">
+            <h4 class="card-title">Giá đăng tin</h4>
+            <table class="table table-light">
+              <thead>
+              <tr>
+                <th colspan="9" class="text-center">Danh sách bất động sản</th>
+              </tr>
+              <tr>
+                <th> Tên </th>
+                <th> Miêu tả </th>
+                <th>Giá</th>
+                <th>Địa chỉ</th>
+                <th>Diện tích</th>
+                <th>Phương thức</th>
+                <th> Trạng thái </th>
+                <th> Tình trạng </th>
+                <th> Chức năng </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="property : ${listProperties}">
+                <td th:text="${property.title}">Tên</td>
+                <td th:text="${property.description}">Tên</td>
+                <td th:text="${property.price}">Tên</td>
+                <td th:text="${property.location}">Tên</td>
+                <td th:text="${property.acreage}">Tên</td>
+                <td th:text="${property.method == 0 ? 'Bán' : (property.method == 1 ? 'Thuê' : 'Không xác định')}">Phương thức</td>
+                <td th:text="${property.status}">Trạng thái</td>
+                <td th:text="${property.type}">Tình trạng</td>
+                <td>
+<!--                  <a th:if="${property.type == 'Completed'}"-->
+
+<!--                     class="btn btn-light">-->
+<!--                    <i class="fas fa-arrow-left"></i> Đã hoàn thành thanh toán-->
+<!--                  </a>-->
+<!--                  <a th:if="${property.type != 'Completed'}"-->
+<!--                     th:href="@{/postnew/confirmPayment/{id}(id=${property.id})}"-->
+<!--                     class="btn btn-light">-->
+<!--                    <i class="fas fa-arrow-left"></i> Thanh toán-->
+<!--                  </a>-->
+                  <a
+                     th:href="@{/propertiesList/edit/{id}(id=${property.id})}"
+                     class="btn btn-light">
+                    <i class="fas fa-arrow-left"></i> Chi tiết và sửa
+                  </a>
+                  <a
+                          th:href="@{/propertiesList/details/edit/{id}(id=${property.id})}"
+                          class="btn btn-light">
+                    <i class="fas fa-arrow-left"></i> Các thông tin khác và sửa
+                  </a>
+<!--                  <a-->
+<!--                          th:href="@{/propertiesList/delete/{id}(id=${property.id})}"-->
+<!--                          class="btn btn-light">-->
+<!--                    <i class="fas fa-arrow-left"></i> Xoá-->
+<!--                  </a>-->
+                </td>
+              </tr>
+              </tbody>
+              <tfoot>
+              <!-- Thanh dưới (footer) -->
+              <tr>
+                <td colspan="9" class="text-center">Tổng số bất động sản: <span th:text="${listProperties.size()}">0</span></td>
+              </tr>
+              </tfoot>
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div th:replace="fragments/footerAdmin"></div>
+</div>
