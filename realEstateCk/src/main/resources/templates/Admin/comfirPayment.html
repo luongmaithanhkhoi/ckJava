@@ -1,0 +1,125 @@
+<div th:replace="fragments/headerAdmin"></div>
+<!-- partial -->
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title"> Đăng tin </h3>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Giá đăng tin</h4>
+                        </p>
+                        <table class="table table-light">
+                            <thead>
+                            <tr>
+                                <th> Thời gian </th>
+                                <th> Tin thường </th>
+                                <th> Vip 1 </th>
+                                <th> Vip 2 </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td> 7 </td>
+                                <td>    </td>
+                                <td> 445.199 đ  </td>
+                                <td> 964.603 đ  </td>
+                            </tr>
+                            <tr>
+                                <td> 10 </td>
+                                <td>36.300 đ </td>
+                                <td> 604.197 đ -5% </td>
+                                <td>1.309.099 đ -5% </td>
+                            </tr>
+                            <tr>
+                                <td> 15 </td>
+                                <td> 48.989 đ -10% </td>
+                                <td> 858.578 đ -10% </td>
+                                <td> 1.860.310 đ -10% </td>
+                            </tr>
+                            <tr>
+                                <td> 30 </td>
+                                <td> 87.120 đ -20% </td>
+                                <td> </td>
+                                <td> </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <br>
+                        <h4 class="page-title">Số dư tài khoản của ban: </h4>
+                        <h4 class="page-title" th:text="${formattedMoney}"></h4>
+                        <br>
+                        <h4 class="page-title">Chọn loại tin và thời gian</h4>
+                        <br>
+                        <form action="/postnew/confirmPayment/save"  method="post"  enctype="multipart/form-data" novalidate>
+                            <!-- Dropdown chọn loại tin -->
+                            <label for="adType">Chọn loại tin:</label>
+                            <select id="adType" name="adType"  class="form-control form-select" aria-label=".form-select-sm"   required>
+                                <option value="" selected>-- Chọn loại tin --</option>
+                                <option value="regular">Tin thường</option>
+                                <option value="vip1">Vip 1</option>
+                                <option value="vip2">Vip 2</option>
+                            </select>
+
+                            <!-- Dropdown chọn thời gian -->
+                            <label for="adDuration">Chọn thời gian (ngày):</label>
+                            <select id="adDuration" name="adDuration"   class="form-control form-select" aria-label=".form-select-sm" required>
+                                <option value="" selected>-- Chọn thời gian --</option>
+                                <option value="7">7 ngày</option>
+                                <option value="10">10 ngày</option>
+                                <option value="15">15 ngày</option>
+                                <option value="30">30 ngày</option>
+                            </select><br>
+                            <!-- Khu vực hiển thị giá -->
+                            <h4>Giá: <span id="adPrice" class="input-group-append">0 đ</span></h4>
+
+                            <input type="hidden" id="propertyId" name="propertyId" th:value="${property.id}">
+                            <!-- Nút gửi -->
+                            <button type="submit" class="btn btn-primary"  id="submitAd">Đăng tin</button>
+                        </form>
+
+                        <div id="message" style="display: none; color: red;">Số dư của bạn không đủ để đăng tin!</div>
+                        <a href="/postnew" class="btn btn-light">
+                            <i class="fas fa-arrow-left"></i> Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="fragments/footerAdmin"></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script>
+    // Bảng giá cho từng loại tin và thời gian
+    const priceTable = {
+        "regular": { "7": 0, "10": 36300, "15": 48989, "30": 87120 },
+        "vip1": { "7": 445199, "10": 604197, "15": 858578, "30": 0 },
+        "vip2": { "7": 964603, "10": 1309099, "15": 1860310, "30": 0 }
+    };
+
+    const adTypeElement = document.getElementById("adType");
+    const adDurationElement = document.getElementById("adDuration");
+    const adPriceElement = document.getElementById("adPrice");
+
+    // Hàm cập nhật giá
+    function updatePrice() {
+        const adType = adTypeElement.value; // Loại tin
+        const adDuration = adDurationElement.value; // Thời gian
+
+        if (adType && adDuration) {
+            // Lấy giá từ bảng giá
+            const price = priceTable[adType][adDuration];
+            adPriceElement.textContent = price > 0 ? price.toLocaleString("vi-VN") + " đ" : "0";
+        } else {
+            adPriceElement.textContent = "0 đ"; // Mặc định
+        }
+    }
+
+    // Gán sự kiện thay đổi cho dropdown
+    adTypeElement.addEventListener("change", updatePrice);
+    adDurationElement.addEventListener("change", updatePrice);
+</script>

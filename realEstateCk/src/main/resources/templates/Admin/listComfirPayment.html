@@ -1,0 +1,54 @@
+<div th:replace="fragments/headerAdmin"></div>
+<!-- partial -->
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title"> Thông tin các tin đăng </h3>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Giá đăng tin</h4>
+                        </p>
+                        <table class="table table-light">
+                            <thead>
+                            <tr>
+                                <th> Tên </th>
+                                <th> Trạng thái </th>
+                                <th> Tình trạng </th>
+                                <th> Chức năng </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="property : ${listProperties}">
+                                <td th:text="${property.title}">Tên</td>
+                                <td th:text="${property.status}">Trạng thái</td>
+                                <td th:text="${property.type}">Tình trạng</td>
+                                <td>
+                                    <!-- Ví dụ thêm nút chức năng -->
+<!--                                    <button type="button">Xem chi tiết</button>-->
+
+                                    <a th:if="${property.type == 'Completed'}"
+
+                                       class="btn btn-light">
+                                        <i class="fas fa-arrow-left"></i> Đã hoàn thành thanh toán
+                                    </a>
+                                    <a th:if="${property.type != 'Completed'}"
+                                       th:href="@{/postnew/confirmPayment/{id}(id=${property.id})}"
+                                       class="btn btn-light">
+                                        <i class="fas fa-arrow-left"></i> Thanh toán
+                                    </a>
+                                </td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="fragments/footerAdmin"></div>
+</div>

@@ -1,0 +1,61 @@
+<div th:replace="fragments/headerAdmin" ></div>
+        <div class="main-panel">
+            <div class="content-wrapper">
+<!--                <div class="page-header">-->
+<!--                    <h3 class="page-title"> Form elements </h3>-->
+<!--                    <nav aria-label="breadcrumb">-->
+<!--                        <ol class="breadcrumb">-->
+<!--                            <li class="breadcrumb-item"><a href="#">Forms</a></li>-->
+<!--                            <li class="breadcrumb-item active" aria-current="page">Form elements</li>-->
+<!--                        </ol>-->
+<!--                    </nav>-->
+<!--                </div>-->
+                <div th:if="${message != null}" class="alert alert-warning">
+                    <span th:text="${message}"></span>
+                </div>
+                <div class="row justify-content-md-center">
+                    <div class="col-md-6 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <form id="paymentForm" onsubmit="redirectToPayPal(event)">
+                                    <h4 class="card-title">Nạp tiền vào tài khoản</h4>
+                                    <span class="input-group-text">Nhập số tiền bạn muốn nạp (đ) *</span>
+                                    <br>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">VND</span>
+                                            </div>
+                                            <input
+                                                    type="number"
+                                                    id="amountInput"
+                                                    name="amount"
+                                                    class="form-control"
+                                                    placeholder="Số tiền (VNĐ)"
+                                                    required>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Nạp</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                function redirectToPayPal(event) {
+                    event.preventDefault(); // Ngăn gửi form mặc định
+                    const amount = document.getElementById("amountInput").value;
+                    const exchangeRate = 0.00004;
+                    const totalInUsd = amount * exchangeRate;
+                    if (totalInUsd && totalInUsd > 0) {
+                        const url = `/paypal/pay?amount=${totalInUsd}`;
+                        window.location.href = url;
+                    } else {
+                        alert("Vui lòng nhập số tiền hợp lệ.");
+                    }
+                }
+            </script>
+            <div th:replace="fragments/footerAdmin"></div>
+    </div>

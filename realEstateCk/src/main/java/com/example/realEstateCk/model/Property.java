@@ -24,7 +24,7 @@ public class Property {
     private BigDecimal price;
 
     @Column(nullable = false)
-    private String location;
+    private String locationAddress;
 
     @Column(nullable = false)
     private String type;
@@ -35,6 +35,9 @@ public class Property {
     @Column(nullable = false)
     private String acreage;
 
+    @Column(nullable = false, columnDefinition = "INT DEFAULT 0")
+    private int method = 0; // Giá trị mặc định
+
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
@@ -44,19 +47,53 @@ public class Property {
     private User owner;
 
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PropertyImage> images;
+    private List<PropertyImages> images;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @Column(nullable = false)
+    private String address;
+
+    @ManyToOne
+    @JoinColumn(name = "img_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "properties_ibfk_4"))
+    private PropertyImages propertyImage;
+
+
+    @ManyToOne
+    @JoinColumn(name = "location_id", nullable = false)
+    private Location location; // Thêm mối quan hệ với bảng location
     // Getters and Setters
     // ...
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+    public int getMethod() {
+        return method;
+    }
+
+    public void setMethod(int method) {
+        this.method = method;
     }
 
     public String getAcreage() {
@@ -91,12 +128,12 @@ public class Property {
         this.price = price;
     }
 
-    public String getLocation() {
-        return location;
+    public String getLocationAddress() {
+        return locationAddress;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setLocationAddress(String locationAddress) {
+        this.locationAddress = locationAddress;
     }
 
     public String getType() {
@@ -106,7 +143,6 @@ public class Property {
     public void setType(String type) {
         this.type = type;
     }
-
 
 
     public String getStatus() {
@@ -133,11 +169,11 @@ public class Property {
         this.owner = owner;
     }
 
-    public List<PropertyImage> getImages() {
+    public List<PropertyImages> getImages() {
         return images;
     }
 
-    public void setImages(List<PropertyImage> images) {
+    public void setImages(List<PropertyImages> images) {
         this.images = images;
     }
 
@@ -147,5 +183,12 @@ public class Property {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+    public PropertyImages getPropertyImage() {
+        return propertyImage;
+    }
+
+    public void setPropertyImage(PropertyImages propertyImage) {
+        this.propertyImage = propertyImage;
     }
 }
